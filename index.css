@@ -140,3 +140,9 @@ input:focus::placeholder {
   padding: 0;
   display: inline-block;
 }
+
+.copyright {
+  font-size: xx-small;
+  margin: 3px 0;
+  color: grey;
+}

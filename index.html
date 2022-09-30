@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="index.css">
+  <title>Bay Allocation</title>
+</head>
+
+<body onload="TimeDue()">
+  <div class="main-page">
+    <img class="first-img" src="mps_logo.png" alt="mps_logo">
+    <img src="scanport_logo.png" alt="scanport_logo">
+
+    <form id="sheetdb-form" class="bay-form" action="https://sheetdb.io/api/v1/hc3v4uwqcrw0d" method="post">
+
+      <input type="text" name="data[DATE]" id="date_time">
+      <input type="text" name="data[TIME]" id="time_date">
+
+      <label>
+        <h4>ALLOCATED BAY</h4>
+      </label>
+      <input type="text" name="data[BAY]" placeholder="Bay Number" id="clear-bay" maxlength="2" autocomplete="off"
+        required>
+
+      <label>
+        <h4>CONTAINER NUMBER</h4>
+      </label>
+      <input type="text" name="data[CONTAINER_ID]" placeholder="Container ID" id="clear-container" maxlength="11"
+        autocomplete="off" oninput="this.value = this.value.toUpperCase()" required>
+
+      <label for="AGENT NAME">
+        <h4>AGENT NAME</h4>
+      </label>
+      <input type="text" name="data[AGENT_NAME]" placeholder="Name" id="clear-name" maxlength="15" autocomplete="off" oninput="this.value = this.value.toUpperCase()"
+        required>
+
+      <label>
+        <h4>PHONE NUMBER</h4>
+      </label>
+      <input type="text" name="data[PHONE_NUMBER]" placeholder="Phone Number" id="clear-phone" maxlength="10"
+        autocomplete="off" required>
+
+      <label>
+        <h4 style="margin-bottom: 5px;">ALLOCATION TIME</h4>
+      </label>
+
+      <div id="time">
+        <div class="section">
+          <p class="time-label">Time In: </p>
+          <input class="time-class" type="text" id="time-in" disabled>
+        </div>
+        <div class="section">
+          <p class="time-label">Time Out: </p>
+          <input class="time-class" type="text" name="data[EXPIRY_DATE]" id="time-out" disabled>
+        </div>
+      </div>
+
+      <div class="print-clear">
+        <input class="print" type="submit" value="Print" onclick="window.print(); return true;">
+
+        <input class="print clear" type="button" value="Clear" onclick="ClearInput();">
+      </div>
+    </form>
+
+    <div class="text-area">
+      <p>Bay Completion Stamp</p>
+    </div>
+  </div>
+</body>
+
+<script src="func.js"></script>
+
+</html>

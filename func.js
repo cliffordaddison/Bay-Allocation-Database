@@ -40,7 +40,7 @@ window.onload = setInterval(function() {
 
 
   let am_pm = "AM";
-  let updated_am_pm = "PM";
+  let updated_am_pm = "AM";
 
   if (hour >= 12) {
     hour %= 12;

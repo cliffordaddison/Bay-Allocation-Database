@@ -1,24 +1,3 @@
-let newDate = new Date();
-let day = newDate.getDate();
-let month = newDate.getMonth()+1;
-let year = newDate.getFullYear();
-let hour = newDate.getHours();
-let min = newDate.getMinutes();
-
-
-hour = hour < 10 ? `0${hour}` : hour;
-min = min < 10 ? `0${min}` : min;
-day = day < 10 ? `0${day}` : day;
-month = month < 10 ? `0${month}` : month;
-
-
-let dateStamp = `${day}/${month}/${year}`;
-let timeStamp = `${hour}:${min}`;
-
-document.getElementById('date_time').value = dateStamp;
-document.getElementById('time_date').value = timeStamp;
-
-
 window.onload = setInterval(function() {
 	
   // Today's Date Data
@@ -39,28 +18,16 @@ window.onload = setInterval(function() {
   let updatedMinutes = updatedDate.getMinutes();
 
 
-  let am_pm = "AM";
-  let updated_am_pm = "AM";
-
-  if (hour >= 12) {
-    hour %= 12;
-    am_pm = "PM";
-  }
-  if (hour == 0) {
-    hour = 12;
-    am_pm = "AM";
-  }
-
-  if (updatedHours >= 12) {
-    updatedHours %= 12;
-    updated_am_pm = "PM";
-  }
-  if (updatedHours == 0) {
-    updatedHours = 12;
-    updated_am_pm = "AM";
-  }
-
-  console.log(updatedHours);
+  let am_pm;
+  let updated_am_pm;
+  
+  am_pm = hour >= 12 ? 'PM' : 'AM';
+  hour = hour % 12;
+  hour = hour ? hour : 12; 
+  
+  updated_am_pm = updatedHours >= 12 ? 'PM' : 'AM';
+  updatedHours = updatedHours % 12;
+  updatedHours = updatedHours ? updatedHours : 12;
 
   hour = hour < 10 ? `0${hour}` : hour;
   updatedHours = updatedHours < 10 ? `0${updatedHours}` : updatedHours;
@@ -78,7 +45,7 @@ window.onload = setInterval(function() {
 
   document.getElementById("time-in").value = `${currentDate} ${currentTime}`;
   document.getElementById("time-out").value = `${expirtyDate} ${expiryTime}`;
-  
+
   let dateStamp = `${day}/${month}/${year}`;
   let timeStamp = `${hour}:${min}`;
 
@@ -89,27 +56,25 @@ window.onload = setInterval(function() {
 
 function ClearInput() {
   document.getElementById("clear-bay").value = "";
-
   document.getElementById("clear-container").value = "";
-
   document.getElementById("clear-name").value = "";
-
   document.getElementById("clear-phone").value = "";
 }
 
-let form = document.getElementById('sheetdb-form');
-form.addEventListener("submit", e => {
-  e.preventDefault();
-  fetch(form.action, {
-      method : "POST",
-      body: new FormData(document.getElementById("sheetdb-form")),
-  }).then(
-      response => response.json()
-  ).then((html) => {
+window.addEventListener("load", function() {
+  const form = document.getElementById('my-form');
+  form.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const data = new FormData(form);
+    const action = e.target.action;
+    fetch(action, {
+      method: 'POST',
+      body: data,
+    })
+    .then(() => {
+      alert("Success!");
+    })
   });
 });
 
-function TimeDue() {
-  mytime=setTimeout('TimeIn()',1000);
-}
 
